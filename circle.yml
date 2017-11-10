@@ -6,7 +6,7 @@ jobs:
     steps:
       - checkout
       - run:
-          command: apt-get update zip
+          command: apt-get update
       - run:
           command: apt-get install zip
       - restore_cache:
