@@ -3,21 +3,20 @@ jobs:
   build:
     docker:
       - image: microsoft/aspnetcore:lts
-    environment:
-      - cachekey: dependency-cache-{{ checksum "DataConverter.Net.csproj" }}
-      - outputFileName: lambdaApp.zip
     steps:
       - checkout
       - run:
+          command: apt-get update zip
+      - run:
           command: apt-get install zip
       - restore_cache:
-          key: $cachekey
+          key: dependency-cache-{{ checksum "DataConverter.Net.csproj" }}
       - run:
-          command: dotnet lambda package -o $outputFileName -c Release -f netcoreapp1.0
+          command: dotnet lambda package -o lambdaApp.zip -c Release -f netcoreapp1.0
       - save_cache:
-          key: $cachekey
+          key: dependency-cache-{{ checksum "DataConverter.Net.csproj" }}
           paths:
             - ~/.nuget/packages
       - store_artifacts:
-          path: ~/$outputFileName
+          path: ~/lambdaApp.zip
           destination: ""
