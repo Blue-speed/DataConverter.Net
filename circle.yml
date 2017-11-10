@@ -14,11 +14,11 @@ jobs:
       - run:
           command: dotnet restore
       - run:
-          command: dotnet lambda package -o lambdaApp.zip -c Release -f netcoreapp1.0
+          command: cd DataConverter.Net; dotnet lambda package -o ../lambdaApp.zip -c Release -f netcoreapp1.0
       - save_cache:
           key: dependency-cache-{{ checksum "DataConverter.Net.csproj" }}
           paths:
             - ~/.nuget/packages
       - store_artifacts:
-          path: ~/lambdaApp.zip
+          path: ./lambdaApp.zip
           destination: ""
