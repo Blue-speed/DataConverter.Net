@@ -1,11 +1,11 @@
 version: 2
 jobs:
   build:
+    docker:
+      - image: docker pull microsoft/aspnetcore:1.0.7
     environment:
       - cachekey: dependency-cache-{{ checksum "DataConverter.Net.csproj" }}
       - outputFileName: lambdaApp.zip
-    docker:
-      - image: docker pull microsoft/aspnetcore:lts
     steps:
       - checkout
       - run:
