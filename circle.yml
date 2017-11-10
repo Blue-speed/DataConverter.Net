@@ -6,9 +6,9 @@ jobs:
     steps:
       - checkout
       - run:
-          command: apt-get update
+          command: apt-get -qq update
       - run:
-          command: apt-get install zip
+          command: apt-get -qq install zip
       - restore_cache:
           key: dependency-cache-{{ checksum "DataConverter.Net.csproj" }}
       - run:
