@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: microsoft/aspnetcore:lts
+      - image: microsoft/aspnetcore-build:lts
     steps:
       - checkout
       - run:
